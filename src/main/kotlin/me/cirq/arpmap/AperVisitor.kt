@@ -46,7 +46,9 @@ class AperVisitor: VoidVisitorAdapter<Any?>() {
                     .filter{ it.type==JavadocInlineTag.Type.LINK && "permission" in it.content }
                     .map{ it.content.trim().replace("""[\n\r]+""".toRegex(), "") }
                     .forEach{ linkTag ->
-                        linkTag.split(' ').forEach{
+                        linkTag.split(' ').forEach inner@{
+                            if(it.isEmpty())
+                                return@inner
                             var permString = normalizePermissionString(it)
                             if(permString.contains("CONTROL_LOCATION_UPDATESCONTROL_LOCATION_UPDATES")) {
                                 // some strange writing in api level 23-25
