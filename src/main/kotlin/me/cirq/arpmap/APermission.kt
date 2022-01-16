@@ -31,7 +31,7 @@ class APermission(_name: String) {
 
     companion object {
         // the i? is a typo in the source code of `android.companion.CompanionDeviceManager'
-        private val PATTERN = """andri?oid\.(Manifest\.)?permissions?.([_A-Z0-9])+""".toRegex()
+        private val PATTERN = """andri?oid\.(contacts\.)?(Manifest\.)?permissions?.([_A-Z0-9])+""".toRegex()
         fun isPermissionString(str: String): Boolean {
             return str.matches(PATTERN) || str in setOf(
                     "NetworkStack.PERMISSION_MAINLINE_NETWORK_STACK",
