@@ -58,6 +58,10 @@ class AperVisitor: VoidVisitorAdapter<Any?>() {
                                 // some strange writing in api level 30
                                 permString = permString.replaceFirst("READ_PRECISE_PHONE_STATE", "")
                             }
+                            else if(permString.contains("androidManifest.permission")) {
+                                // bug in API-31, typo
+                                permString = permString.replaceFirst("android", "android.")
+                            }
                             perms += SinglePermission(permString)
                         }
                     }
