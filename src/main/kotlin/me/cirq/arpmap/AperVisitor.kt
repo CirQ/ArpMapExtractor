@@ -89,7 +89,8 @@ class AperVisitor: VoidVisitorAdapter<Any?>() {
                     is SingleMemberAnnotationExpr -> {
                         val p = it.memberValue.toString()
                         val pVal = normalizePermissionString(p)
-                        perms += SinglePermission(pVal)
+                        if(pVal != "carrier privileges")    // fix an undefined permission in VcnManager
+                            perms += SinglePermission(pVal)
                     }
                     is NormalAnnotationExpr -> {
                         it.pairs.forEach { pair ->
